@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grocery</title>
+  <%= stylesheet_link_tag	'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-top navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="navbar-header">
+   	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+   	    <span class="sr-only">Toggle navigation</span>
+   	    <span class="icon-bar"></span>
+   	    <span class="icon-bar"></span>
+   	    <span class="icon-bar"></span>
+   	  </button>
+    <a class="navbar-brand" href="/">Rails Tutorial</a>
+   	</div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "List", products_path %></li>
+            <li><%= link_to "New", new_product_path %></li>
+          </ul>
+        </li>
+      </ul> 
+
+       <% if user_signed_in? %>  <!--link--->
+            <%= link_to "Edit profile", edit_user_registration_path %>
+          <% else %>
+            <%= link_to "Sign up", new_user_registration_path %>
+            <%= link_to "Login", new_user_session_path %>
+          <% end %>
+          <% if user_signed_in? %>
+            <%# <li role="separator" class="divider"> %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+          <% end %>
+            <%= link_to "Edit profile", edit_user_registration_path %>
+            <%= link_to "Sign up", new_user_registration_path %>
+            <%= link_to "Login", new_user_session_path %>
+            <%# <li role="separator" class="divider"></li>  %>
+            <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+
+       <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <% if user_signed_in? %>  <!--link--->
+            <%= link_to "Edit profile", edit_user_registration_path %>
+          <% else %>
+            <%= link_to "Sign up", new_user_registration_path %>
+            <%= link_to "Login", new_user_session_path %>
+          <% end %>
+          <% if user_signed_in? %>
+            <li role="separator" class="divider"> 
+            <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+          <% end %>
+            <%= link_to "Edit profile", edit_user_registration_path %>
+            <%= link_to "Sign up", new_user_registration_path %>
+            <%= link_to "Login", new_user_session_path %>
+            <li role="separator" class="divider"></li> 
+            <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+          </ul>
+        </li>
+      </ul> 
+
+    </div>
+      </div>
+    </div>
+  </nav>
+  <div id="main-container" class="container">
+    <%= yield %>
+  </div>
+</body>
+</html>
+           
