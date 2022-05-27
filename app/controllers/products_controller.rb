@@ -5,7 +5,18 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @products.to_csv}
+      # format.xls { send_data @products.to_csv(col_sep: "\t"), filename: 'your_file_name.xls'}
+    end
   end
+
+  def import
+    puts params[:file]
+    Product.import(params[:file])
+    redirect_to product_s__url, notice: "Products imported."
+ end
 
   def show
   end
